@@ -40,11 +40,23 @@ Demonstrate your understanding of this week's concepts by answering the followin
 
 - [ ] Explain the difference between `Relational Databases` and `SQL`.
 
+       A Relational Database is the software that manages the data and SQL is a language used to query the DB
+
+
 - [ ] Why do tables need a `primary key`?
+
+      Because every table need a unique identifyer
+
 
 - [ ] What is the name given to a table column that references the primary key on another table.
 
+      Foreign key
+
+
 - [ ] What do we need in order to have a _many to many_ relationship between two tables.
+
+      Foreign key(s) are required especially if you have an intermediary table.
+
 
 ## Minimum Viable Product
 
@@ -52,7 +64,7 @@ Take the steps necessary to complete the project from scratch. Start by initiali
 
 Complete the following tasks:
 
-- [ ] Design the data model and use _knex migrations_ to create the database and tables needed to satisfy the following business rules:
+  - [ ] Design the data model and use _knex migrations_ to create the database and tables needed to satisfy the following business rules:
   - [ ] a `project` can have multiple `tasks`.
   - [ ] a `task` belongs to only one `project`.
   - [ ] a `project` can use multiple `resources`. Example of `resources` are: computer, conference room, microphone, delivery van.
@@ -61,8 +73,8 @@ Complete the following tasks:
   - [ ] when adding `resources` the client must provide a name, the description is optional.
   - [ ] when adding a `task` the client must provide a description, the notes are optional.
   - [ ] when adding a `task` the client must provide the `id` of an existing project.
-  - [ ] for `projects` and `tasks` if no value is provided for the `completed` property, the API should provide a default value of `false`.
-- [ ] Build an API with endpoints for:
+  - [ ] for `projects` and `tasks` if no value is provided for the `completed` property, the API should provide a default value of  `false`.
+  - [ ] Build an API with endpoints for:
   - [ ] adding resources.
   - [ ] retrieving a list of resources.
   - [ ] adding projects.
