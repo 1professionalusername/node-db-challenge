@@ -1,43 +1,48 @@
-
+//Go back and write notes for this sprint as well as fix the models files(most were done in projects folder)
 exports.up = async function (knex) {
+
     await knex.schema.createTable("project", (table) => {
+
         table.increments("id")
-        table.string("name").notNull()
-        table.string("description")
-        table.boolean("completed")
+
+        table.text("name").notNull().unique()
+
+        table.text("description")
+
+        table.boolean("completed").notNull().defaultTo("false")
     })
 
     await knex.schema.createTable("task", (table) => {
+
         table.increments("id")
+
         table.string("description").notNull()
+
         table.string("notes")
-        table.boolean("completed").defaultTo(false)
-        table.integer("project_id")
-            .notNull()
-            .references("id")
-            .inTable("project")
+
+        table.integer("project_id").notNull()
+
+        table.boolean("completed").notNull().defaultTo(false)
     })
 
     await knex.schema.createTable("resource", (table) => {
+
         table.increments("id")
-        table.string("name").notNull()
+
+        table.string("name").notNull().unique()
+
         table.string("description")
     })
 
     await knex.schema.createTable("project_resource", (table) => {
-        table.integer("project_id")
-            .notNull()
-            .references("id")
-            .inTable("project")
-            .onDelete("CASCADE")
-            .onUpdate("CASCADE")
 
-        table.integer("resource_id")
-            .notNull()
-            .references("id")
-            .inTable("project")
-            .onDelete("CASCADE")
-            .onUpdate("CASCADE")
+        table.integer("project_id").notNull()
+        // .onDelete("CASCADE") code that Jason taught us about. Rewatch end of lecture as refresher
+        // .onUpdate("CASCADE")
+
+        table.integer("resource_id").notNull()
+        // .onDelete("CASCADE") code that Jason taught us about. Rewatch end of lecture as refresher
+        // .onUpdate("CASCADE")
 
         table.primary(["project_id", "resource_id"])
     })
@@ -47,9 +52,13 @@ exports.up = async function (knex) {
 };
 
 exports.down = async function (knex) {
+
     await knex.schema.dropTableIfExists("project_resource")
+
     await knex.schema.dropTableIfExists("resource")
+
     await knex.schema.dropTableIfExists("task")
+
     await knex.schema.dropTableIfExists("project")
 
 };
